@@ -87,12 +87,19 @@ namespace FunkyUI.Classes
                 Close();
                 return ETranslateResult.Block;
             }
-            return ETranslateResult.Block;
+            return ETranslateResult.Ignore;
         }
 
         public override void TranslateAxes(ref float[] axes)
         {
-            if (_isActive) axes = null;
+            //if (_isActive) axes = null;
+            if (_isActive)
+            {
+                axes[2] = 0;
+                axes[3] = 0;
+                axes[4] = 0;
+                axes[5] = 0;
+            }
         }
 
         public override ECursorResult ShouldLockCursor()
