@@ -328,7 +328,6 @@ namespace FunkyUI.Classes
 
             if (idx >= 0 && idx < _items.Length)
             {
-                Plugin.LogSource.LogWarning($"Name: {_items[idx].Name}\nDesc: {_items[idx].Description}");
                 _centerName.text = _items[idx].Name.ToUpper();
                 _centerDesc.text = _items[idx].Description;
                 _separator.style.opacity = string.IsNullOrEmpty(_items[idx].Description) ? 0 : 1;
