@@ -51,6 +51,7 @@ namespace FunkyUI.Classes
             _contentGroup.pickingMode = PickingMode.Ignore;
             _contentGroup.style.position = Position.Absolute;
             _contentGroup.style.alignItems = Align.Center;
+            _contentGroup.style.justifyContent = Justify.Center;
             _contentGroup.style.translate = new Translate(Length.Percent(-50), Length.Percent(-50), 0);
             Add(_contentGroup);
 
