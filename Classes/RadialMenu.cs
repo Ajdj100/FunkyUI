@@ -186,6 +186,11 @@ namespace FunkyUI.Classes
 
             var menuContainer = new VisualElement();
             float diameter = OuterRadius * 2f + 40f;
+
+            //set parent size to ensue full click detection coverage
+            style.width = 1920;
+            style.height = 1080;
+
             menuContainer.style.width = diameter;
             menuContainer.style.height = diameter;
 
