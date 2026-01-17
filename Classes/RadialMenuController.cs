@@ -30,7 +30,7 @@ namespace FunkyUI.Classes
             _isActive = false;
         }
 
-        public void Show(RadialMenuItem[] items)
+        public void Show(RadialMenuOption[] items)
         {
             var ui = Singleton<CommonUI>.Instance.EftBattleUIScreen;
             if (ui == null)

@@ -21,7 +21,7 @@ namespace FunkyUI.Classes
         }
     }
 
-    public class RadialMenuItem
+    public class RadialMenuOption
     {
         public string Name;
         public string Description;
@@ -112,7 +112,7 @@ namespace FunkyUI.Classes
             }
         }
 
-        public void SetContents(RadialMenuItem item)
+        public void SetContents(RadialMenuOption item)
         {
             _nameLabel.text = item.Name.ToUpper();
 
@@ -145,7 +145,7 @@ namespace FunkyUI.Classes
 
     public class RadialMenu : VisualElement
     {
-        private RadialMenuItem[] _items;
+        private RadialMenuOption[] _items;
         private List<RadialMenuSlice> _slices = new();
         private VisualElement _sliceContainer, _overlayContainer, _centerBg, _separator;
         private Label _centerName, _centerDesc;
@@ -283,7 +283,7 @@ namespace FunkyUI.Classes
             RegisterCallback<MouseLeaveEvent>(_ => SetHoverIndex(-1));
         }
 
-        public void SetItems(RadialMenuItem[] items)
+        public void SetItems(RadialMenuOption[] items)
         {
             Plugin.LogSource.LogInfo("RadialMenu populating items");
             _items = items;

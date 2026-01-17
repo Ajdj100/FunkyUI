@@ -117,63 +117,63 @@ namespace FunkyUI
                     doc.rootVisualElement.Add(radialMenu);
                 }
 
-                var option = new RadialMenuItem[]
+                var option = new RadialMenuOption[]
                 {
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Use",
                     Description = "Consume the selected item immediately.",
                     //Icon = iconA,
                     Callback = () => LogSource.LogInfo("Action: Use")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Inspect",
                     Description = "Examine item details and durability.",
                     //Icon = iconB,
                     Callback = () => LogSource.LogInfo("Action: Inspect")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Drop",
                     Description = "Discard item on the ground for teammates.",
                     //Icon = iconA,
                     Callback = () => LogSource.LogInfo("Action: Drop")
                 },
-                    new RadialMenuItem {
+                    new RadialMenuOption {
                     Name = "Use",
                     Description = "Consume the selected item immediately.",
                     //Icon = iconA,
                     Callback = () => LogSource.LogInfo("Action: Use")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Inspect",
                     Description = "Examine item details and durability.",
                     //Icon = iconB,
                     Callback = () => LogSource.LogInfo("Action: Inspect")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Inspect",
                     Description = "Examine item details and durability.",
                     //Icon = iconB,
                     Callback = () => LogSource.LogInfo("Action: Inspect")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Drop",
                     Description = "Discard item on the ground for teammates.",
                     //Icon = iconA,
                     Callback = () => LogSource.LogInfo("Action: Drop")
                 },
-                    new RadialMenuItem {
+                    new RadialMenuOption {
                     Name = "Use",
                     Description = "Consume the selected item immediately.",
                     //Icon = iconA,
                     Callback = () => LogSource.LogInfo("Action: Use")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Inspect",
                     Description = "Examine item details and durability.",
                     //Icon = iconB,
                     Callback = () => LogSource.LogInfo("Action: Inspect")
                 },
-                new RadialMenuItem {
+                new RadialMenuOption {
                     Name = "Drop",
                     Description = "Discard item on the ground for teammates.",
                     //Icon = iconA,
