@@ -30,6 +30,7 @@ namespace FunkyUI
     {
         public static ManualLogSource LogSource;
         public static Plugin Instance;
+        public static GameObject UIContainer;
 
         // BaseUnityPlugin inherits MonoBehaviour, so you can use base unity functions like Awake() and Update()
         private void Awake()
@@ -43,11 +44,12 @@ namespace FunkyUI
         public void InjectUI(EftBattleUIScreen battleUI)
         {
             if (battleUI == null) return;
-            if (GameObject.Find("FunkyUI_Radial_Container") != null) return;
+            if (UIContainer != null) return;
 
             LogSource.LogInfo("FunkyUI: Injecting Radial Menu...");
 
             GameObject uiLayer = new GameObject("FunkyUI_Radial_Container");
+            UIContainer = uiLayer;
             uiLayer.transform.SetParent(battleUI.transform, false);
 
             var settings = ScriptableObject.CreateInstance<PanelSettings>();
@@ -85,7 +87,7 @@ namespace FunkyUI
                     return;
                 }
 
-                GameObject container = GameObject.Find("FunkyUI_Radial_Container");
+                GameObject container = UIContainer;
                 if (container == null)
                 {
                     LogSource.LogWarning("UI Container was destroyed");
