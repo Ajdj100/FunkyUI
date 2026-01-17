@@ -101,22 +101,6 @@ namespace FunkyUI
                     return;
                 }
 
-                if (!doc.rootVisualElement.Contains(MenuController.Menu))
-                {
-                    LogSource.LogWarning("RadialMenu was detached from Root");
-
-                    doc.rootVisualElement.style.width = Length.Percent(100);
-                    doc.rootVisualElement.style.height = Length.Percent(100);
-                    doc.rootVisualElement.style.flexGrow = 1;
-
-                    var radialMenu = MenuController.Menu;
-                    radialMenu.style.position = Position.Absolute;
-                    radialMenu.style.left = Length.Percent(50);
-                    radialMenu.style.top = Length.Percent(50);
-
-                    doc.rootVisualElement.Add(radialMenu);
-                }
-
                 var option = new RadialMenuOption[]
                 {
                 new RadialMenuOption {

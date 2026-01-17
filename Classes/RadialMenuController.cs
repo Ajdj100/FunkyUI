@@ -4,6 +4,7 @@ using EFT.InputSystem;
 using EFT.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static EFT.Player;
 
 namespace FunkyUI.Classes
 {
@@ -42,6 +43,21 @@ namespace FunkyUI.Classes
             Plugin.LogSource.LogWarning("Controller attempting to show menu");
             Plugin.LogSource.LogInfo($"Trying to load menu with {items.Length} items");
             if (Menu == null) return;
+
+            var doc = Plugin.UIContainer.GetComponent<UIDocument>();
+            if (!doc.rootVisualElement.Contains(Menu))
+            {
+                doc.rootVisualElement.style.width = Length.Percent(100);
+                doc.rootVisualElement.style.height = Length.Percent(100);
+                doc.rootVisualElement.style.flexGrow = 1;
+
+                var radialMenu = Menu;
+                radialMenu.style.position = Position.Absolute;
+                radialMenu.style.left = Length.Percent(50);
+                radialMenu.style.top = Length.Percent(50);
+
+                doc.rootVisualElement.Add(radialMenu);
+            }
 
             // Clear old mod data and load new data
             Menu.ClearSubscribers();
