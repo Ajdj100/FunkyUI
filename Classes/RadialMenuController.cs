@@ -47,6 +47,19 @@ namespace FunkyUI.Classes
             Menu.ClearSubscribers();
             Menu.SetItems(items);
 
+            Menu.OnClickOutside += () =>
+            {
+                Plugin.LogSource.LogInfo("ClickOutside");
+                OnClickOutside?.Invoke();
+                Close();
+            };
+            Menu.OnItemSelected += (id) =>
+            {
+                Plugin.LogSource.LogInfo("Selected");
+                OnItemSelected?.Invoke(id);
+                Close();
+            };
+
             _isActive = true;
             Menu.style.display = DisplayStyle.Flex;
             Menu.visible = true;
@@ -64,17 +77,6 @@ namespace FunkyUI.Classes
         public void LinkMenu(RadialMenu menu)
         {
             Menu = menu;
-
-            Menu.OnClickOutside += () =>
-            {
-                OnClickOutside?.Invoke();
-                this.Close();
-            };
-            Menu.OnItemSelected += (id) =>
-            {
-                OnItemSelected?.Invoke(id);
-                this.Close();
-            };
         }
 
         public override ETranslateResult TranslateCommand(ECommand command)
