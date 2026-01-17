@@ -64,7 +64,7 @@ namespace FunkyUI.Classes
 
             _nameLabel = new Label();
             _nameLabel.pickingMode = PickingMode.Ignore;
-            _nameLabel.style.fontSize = 12;
+            _nameLabel.style.fontSize = 17;
             _nameLabel.style.color = new Color(0.9f, 0.9f, 0.9f);
             _nameLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
             var font = Resources.FindObjectsOfTypeAll<Font>().FirstOrDefault(f => f.name.Contains("Bender"));
