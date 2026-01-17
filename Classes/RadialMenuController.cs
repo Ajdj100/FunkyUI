@@ -1,0 +1,119 @@
+﻿using System;
+using Comfort.Common;
+using EFT.InputSystem;
+using EFT.UI;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace FunkyUI.Classes
+{
+    public class RadialMenuController : InputNode
+    {
+        // Singleton access for other mods
+        public static RadialMenuController Instance { get; private set; }
+
+        public RadialMenu Menu { get; private set; }
+        private bool _isActive;
+        private static InputTree _cachedInputTree;
+
+        public event Action OnClickOutside;
+        public event Action<int> OnItemSelected;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        private void Start()
+        {
+            GetInputTree().Add(this);
+            _isActive = false;
+        }
+
+        public void Show(RadialMenuItem[] items)
+        {
+            var ui = Singleton<CommonUI>.Instance.EftBattleUIScreen;
+            if (ui == null)
+            {
+                Plugin.LogSource.LogError("Battle Screen doesnt exist, abandoning");
+                return;
+            }
+
+            Plugin.LogSource.LogWarning("Controller attempting to show menu");
+            Plugin.LogSource.LogInfo($"Trying to load menu with {items.Length} items");
+            if (Menu == null) return;
+
+            // Clear old mod data and load new data
+            Menu.ClearSubscribers();
+            Menu.SetItems(items);
+
+            _isActive = true;
+            Menu.style.display = DisplayStyle.Flex;
+            Menu.visible = true;
+            Menu.SetVisible(true);
+        }
+
+        public void Close()
+        {
+            _isActive = false;
+            Menu.style.display = DisplayStyle.None;
+            Menu.visible = false;
+        }
+
+        // Logic to link the UI class to this controller
+        public void LinkMenu(RadialMenu menu)
+        {
+            Menu = menu;
+
+            Menu.OnClickOutside += () =>
+            {
+                OnClickOutside?.Invoke();
+                this.Close();
+            };
+            Menu.OnItemSelected += (id) =>
+            {
+                OnItemSelected?.Invoke(id);
+                this.Close();
+            };
+        }
+
+        public override ETranslateResult TranslateCommand(ECommand command)
+        {
+            if (!_isActive) return ETranslateResult.Ignore;
+            if (command.IsCommand(ECommand.Escape))
+            {
+                Close();
+                return ETranslateResult.Block;
+            }
+            return ETranslateResult.Block;
+        }
+
+        public override void TranslateAxes(ref float[] axes)
+        {
+            if (_isActive) axes = null;
+        }
+
+        public override ECursorResult ShouldLockCursor()
+        {
+            return _isActive ? ECursorResult.ShowCursor : ECursorResult.Ignore;
+        }
+
+        private static InputTree GetInputTree()
+        {
+            if (_cachedInputTree == null)
+            {
+                var inputObj = GameObject.Find("___Input") ?? throw new System.NullReferenceException("Could not find ___Input!");
+                _cachedInputTree = inputObj.GetComponent<InputTree>();
+            }
+            return _cachedInputTree;
+        }
+
+        private void OnDestroy()
+        {
+            var tree = GetInputTree();
+            if (tree != null) tree.Remove(this);
+
+            if (Instance == this) Instance = null;
+        }
+    }
+}
